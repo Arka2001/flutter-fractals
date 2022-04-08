@@ -22,8 +22,8 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 1)).then((value) async {
-      for (int i = 0; i < 2000000; i++) {
+    Future.delayed(const Duration(seconds: 1)).then((value) async {
+      for (int i = 0; i < 200000; i++) {
         setState(() {
           iter += 0.00001;
         });
@@ -41,6 +41,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
+        backgroundColor: Colors.white,
         body: Container(
           child: CustomPaint(
             painter: DemoPainter(iter: iter, colorList: colorList),
@@ -112,6 +113,43 @@ class DemoPainter extends CustomPainter {
     renderStaticStructure(canvas, size, iter - 1, initIter);
   }
 
+  double randomFunctionGenerator(double x) {
+    List<double> functions = [
+      sin(x),
+      cos(x),
+      tan(x),
+      atan(x),
+      sin(x) * cos(x),
+      sin(x) * tan(x),
+      sin(x) * atan(x),
+      cos(x) * tan(x),
+      cos(x) * atan(x),
+      tan(x) * atan(x),
+      sin(x) * cos(x) * tan(x),
+      sin(x) * cos(x) * atan(x),
+      sin(x) * tan(x) * atan(x),
+      cos(x) * tan(x) * atan(x),
+      sin(x) * cos(x) * tan(x) * atan(x),
+      x * sin(x),
+      x * cos(x),
+      x * tan(x),
+      x * atan(x),
+      x * sin(x) * cos(x),
+      x * sin(x) * tan(x),
+      x * sin(x) * atan(x),
+      x * cos(x) * tan(x),
+      x * cos(x) * atan(x),
+      x * tan(x) * atan(x),
+      x * sin(x) * cos(x) * tan(x),
+      x * sin(x) * cos(x) * atan(x),
+      x * sin(x) * tan(x) * atan(x),
+      x * cos(x) * tan(x) * atan(x),
+      x * sin(x) * cos(x) * tan(x) * atan(x),
+    ];
+
+    return functions[Random().nextInt(functions.length)];
+  }
+
   // Recursive Function to draw circles which iterates from a number iter to 0
 
   void renderDynamicStructure(Canvas canvas, Size size, double iter,
@@ -120,18 +158,24 @@ class DemoPainter extends CustomPainter {
       double x = 0.0;
       double tempIter = totalIter - j + iter;
 
-      for (double i = 0; i < 100; i += 0.01) {
+      for (double i = 0; i < 80; i += 0.1) {
+        double fun1 = randomFunctionGenerator(x);
+
+        double fun2 = randomFunctionGenerator(x);
         canvas.drawCircle(
           // This is where the magic happens
           Offset(
-            (size.width / 2) +
+            (size.width / 2)
                 // Change these functions for various things to happen
                 // Change "atan(x) * sin(x) * cos(x)" to "cos(x) * sin(x)" or any combination of trigonometric functions
-                (x * sin(x) * tan(x)),
+                +
+                // (x * x * sin(x)),
+                fun1,
             (size.height / 2) +
                 // Same changes for these as the top
                 // Note that if the top functions and these are the same, you'll get a 45 degree line of points
-                (x * cos(x) * atan(x)),
+                // (x * x * cos(x)),
+                fun2,
           ),
 
           // Change this for changing radius in different iterations
@@ -156,7 +200,7 @@ class DemoPainter extends CustomPainter {
 var colors = [
   //ColorInfo("black", Colors.black, Colors.black.toString()),
   ColorInfo("red", Colors.red, Colors.red[500].toString()),
-  // ColorInfo("green", Colors.green, Colors.green[500].toString()),
+  ColorInfo("green", Colors.green, Colors.green[500].toString()),
   ColorInfo("blue", Colors.blue, Colors.blue[700].toString()),
   // ColorInfo("yellow", Colors.yellow, Colors.yellow[500].toString()),
   // ColorInfo("purple", Colors.purple, Colors.purple[500].toString()),
@@ -167,7 +211,7 @@ var colors = [
   ColorInfo("pink", Colors.pink, Colors.pink[500].toString()),
   ColorInfo("orange", Colors.orange, Colors.orange[500].toString()),
   ColorInfo("indigo", Colors.indigo, Colors.indigo[700].toString()),
-  //ColorInfo("white", Colors.white, Colors.white.toString()),
+  // ColorInfo("white", Colors.white, Colors.white.toString()),
   //ColorInfo("transparent", Colors.transparent, Colors.transparent.toString()),
 ];
 
@@ -177,4 +221,11 @@ class ColorInfo {
   String hex;
 
   ColorInfo(this.name, this.color, this.hex);
+}
+
+class FunctionInfo {
+  String name;
+  Function(double x) fun;
+
+  FunctionInfo(this.name, this.fun);
 }
