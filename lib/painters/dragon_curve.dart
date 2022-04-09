@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'dart:math' as Math;
 
@@ -17,8 +19,18 @@ class DragonCurve extends CustomPainter {
 
     route = getNext(right, 1);
 
+    List<Color> colors = [
+      Colors.blue,
+      Colors.black,
+      Colors.indigo,
+      Colors.green,
+      Colors.orange,
+      Colors.purple,
+      Colors.red,
+    ];
+
     Paint p = Paint()
-      ..color = Colors.black
+      ..color = colors[Random().nextInt(colors.length)]
       ..style = PaintingStyle.stroke
       ..strokeJoin = StrokeJoin.bevel
       ..strokeWidth = 2;

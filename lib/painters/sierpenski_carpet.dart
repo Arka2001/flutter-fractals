@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'dart:math' as Math;
 
@@ -25,8 +27,18 @@ class SierpinskiCarpet extends CustomPainter {
 
     totalSteps = 5;
 
+    List<Color> colors = [
+      Colors.blue,
+      Colors.black,
+      Colors.indigo,
+      Colors.green,
+      Colors.orange,
+      Colors.purple,
+      Colors.red,
+    ];
+
     Paint p = Paint()
-      ..color = Colors.blue
+      ..color = colors[Random().nextInt(colors.length)]
       ..style = PaintingStyle.fill;
 
     drawCarpet(canvas, p, 1);

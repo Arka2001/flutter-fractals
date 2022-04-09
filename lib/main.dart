@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _timer = Timer.periodic(
-      Duration(seconds: 5),
+      Duration(seconds: 2),
       (timer) {
         if (_currentPage < 2) {
           _currentPage++;
