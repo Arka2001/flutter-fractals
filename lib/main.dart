@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:generate_art/painters/painters.dart';
-import 'package:generate_art/painters/sierpenski_carpet.dart';
+import 'package:generate_art/generate_screen.dart';
 
 import 'screens/screens.dart';
 
@@ -18,60 +17,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Fractal Art',
-      home: HomePage(),
+      home: GenerateScreen(),
     );
-  }
-}
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
-
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _currentPage = 0;
-  late Timer _timer;
-  PageController _pageController = PageController(initialPage: 0);
-
-  @override
-  void initState() {
-    super.initState();
-    _timer = Timer.periodic(
-      Duration(seconds: 2),
-      (timer) {
-        if (_currentPage < 2) {
-          _currentPage++;
-        } else {
-          _currentPage = 0;
-        }
-
-        _pageController.animateToPage(
-          _currentPage,
-          duration: Duration(milliseconds: 1000),
-          curve: Curves.easeIn,
-        );
-      },
-    );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _timer.cancel();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: PageView(
-      controller: _pageController,
-      children: const [
-        BranchingTreeScreen(),
-        SierpinskiCarpetScreen(),
-        DragonCurveScreen(),
-      ],
-    ));
   }
 }
