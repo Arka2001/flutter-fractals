@@ -30,10 +30,9 @@
     which is then overlapped with an upside down equilateral triangle. The 6 smaller triangnles formed are overlapped again by corresponding inverted triangles of the same shape and size. And the process is repeated infinitely, which results in the beautiful Koch Snowflake.<br>
 </p>
 <p>An Example is shown below:</p>
-<p align="center">
-    <iframe align="center" src="https://giphy.com/embed/QAytGgJjWX0g2r7R5d" width="480" height="480" frameBorder="0" class="giphy-embed"></iframe>
+<p align = "center">
+    <img align="center" src="https://www.researchgate.net/profile/Yaroslav-Sergeyev/publication/321045063/figure/fig3/AS:709179266330625@1546092921185/Generation-of-the-Koch-snowflake.png" frameBorder="0" />
 </p>
-<p align="end"><a href="https://giphy.com/gifs/kendama-kendamaisr-kisr-QAytGgJjWX0g2r7R5d">via GIPHY</a></p>
 
 <br>
 
